@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+
+# run via: curl 'https://raw.githubusercontent.com/entretechno/sample_app_6th_ed/cloud9/bin/cloud9_setup' | bash
+
+set -e -o pipefail
+
+cd "$HOME"
+wget 'https://sqlite.org/2022/sqlite-autoconf-3380200.tar.gz'
+tar -xzf sqlite-autoconf-3380200.tar.gz
+cd sqlite-autoconf-3380200
+./configure
+sudo make install
+cd "$HOME"
+sudo rm -r sqlite-autoconf-3380200{,.tar.gz}
+
+source "$HOME/.rvm/scripts/rvm"
+rvm install ruby-2.7.5
+rvm --default use ruby-2.7.5
+gem install rubygems-update bundler
+gem update --system
+
+npm install --global yarn
+
+rm -r "$HOME/environment"
+git clone 'https://github.com/entretechno/sample_app_6th_ed.git' "$HOME/environment"
+cd "$HOME/environment"
+git checkout cloud9
+bundle config build.sqlite3 --with-sqlite3-include='/usr/local/include' --with-sqlite3-lib='/usr/local/lib'
+bundle config set --local without production
+bundle install
+yarn install
+bundle exec rails db:create db:migrate db:seed

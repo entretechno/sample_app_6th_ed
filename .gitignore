@@ -39,3 +39,7 @@ yarn-debug.log*
 
 # Ignore db test files.
 db/test.*
+
+# AWS Cloud9
+/.c9/*
+!/.c9/project.settings

@@ -1,0 +1,23 @@
+{
+    "run": {
+        "configs": {
+            "json()": {
+                "Rails Console": {
+                    "command": "bin/rails console",
+                    "cwd": "/",
+                    "name": "Rails Console",
+                    "runner": "Ruby",
+                    "toolbar": true
+                },
+                "Rails Server": {
+                    "command": "bin/rails server",
+                    "cwd": "/",
+                    "default": true,
+                    "name": "Rails Server",
+                    "runner": "Ruby",
+                    "toolbar": true
+                }
+            }
+        }
+    }
+}

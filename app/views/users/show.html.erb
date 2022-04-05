@@ -4,6 +4,7 @@
     <section>
       <h1>
         <%= gravatar_for @user %>
+        <% user_display_name =  @user.full_name_with_nick_name_for_display %>
         <%= @user.name %>
       </h1>
     </section>

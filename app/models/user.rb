@@ -16,6 +16,9 @@ class User < ApplicationRecord
   validates :email, presence: true, length: { maximum: 255 },
                     format: { with: VALID_EMAIL_REGEX },
                     uniqueness: true
+
+  validates :nick_name, length: { minimum: 3, maximum: 10 }, uniqueness: true
+
   has_secure_password
   validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
 
@@ -105,6 +108,10 @@ class User < ApplicationRecord
   # Returns true if the current user is following the other user.
   def following?(other_user)
     following.include?(other_user)
+  end
+
+  def full_name_with_nick_name_for_display
+    self.name + ' (' + self.nick_name + ')' rescue ''
   end
 
   private
